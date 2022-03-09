@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "D-O Main Body",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#003245",
+			"titleBar.activeBackground": "#004660",
+			"titleBar.activeForeground": "#F5FCFF"
+		}
+	}
+}
