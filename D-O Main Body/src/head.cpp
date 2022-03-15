@@ -15,11 +15,11 @@ Head Tilt: This is the angle of the head side-to-side. Positive is right, negati
 */
 
 //*variables for the different rotations of the head and neck assembly----------------------------
-float neckRotationAngle;
-float neckTiltAngle;
-float headRotationAngle;
-float headNodAngle;
-float headTiltAngle;
+int neckRotationAngle;
+int neckTiltAngle;
+int headRotationAngle;
+int headNodAngle;
+int headTiltAngle;
 
 //*Servo pin definitions-------------------------------------------------------------------------
 int neckRotationPin = 9;

@@ -1,15 +1,13 @@
 #include <Arduino.h>
-#include <head.h>
+#include <body.h>
 
-
-Head head;
-
+Body body;
 
 void setup()
 {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  head.headSetup();
+  body.bodySetup();
 }
 
 void loop()

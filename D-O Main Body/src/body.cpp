@@ -3,6 +3,9 @@
 #include <head.h>
 #include <body.h>
 
+//*variables for the different rotations in the body for retrieval----------------------------
+int lateralWeightAngle;
+
 //*Servo pin definitions-------------------------------------------------------------------------
 int lateralWeightPin = 11; // TODO: pick real pins
 int driveMotorPin = 12;
@@ -27,7 +30,7 @@ void Body::bodySetup()
  * This sets the neck rotation and tilt angle in degrees.
  * This is the rotation of the entire head and neck assembly relative to the main body and the tilt relative to the rotation bar
  */
-void setNeckAngles(int rotation, int tilt)
+void Body::setNeckAngles(int rotation, int tilt)
 {
     head.setNeckRotation(rotation);
     head.setNeckTilt(tilt);
@@ -40,9 +43,30 @@ void setNeckAngles(int rotation, int tilt)
  * This sets the neck rotation and tilt angle in degrees.
  * This is the rotation of the entire head and neck assembly relative to the main body and the tilt relative to the rotation bar
  */
-void setHeadAngles(int rotation, int tilt, int nod)
+void Body::setHeadAngles(int rotation, int tilt, int nod)
 {
     head.setHeadRotation(rotation);
     head.setHeadTilt(tilt);
     head.setHeadNod(tilt);
+}
+
+/** setLateralWeightAngle(int angle)
+ * @param angle: 0 degrees is in the middle, positive is right and negative is left. Max angle is +/- 25 degrees
+ * TODO: find the real min and max angle
+ * This sets the position of the lateral stabilization weight
+ */
+void Body::setLateralWeightAngle(int angle)
+{
+    if (angle > 25)
+    {
+        angle = 25;
+    }
+    else if (angle < -25)
+    {
+        angle = -25;
+    }
+    // Now we're actually setting/sending the angle
+    lateralWeightAngle = angle;
+    int servoAngle = map(angle, -25, 25, 0, 180); // TODO: make sure this map has the correct min and max vales for the servo
+    lateralWeightServo.write(servoAngle);
 }
