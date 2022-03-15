@@ -9,6 +9,8 @@ private:
 public:
     Body(void);
     void bodySetup();
+    void setNeckAngles(int rotation, int tilt);
+    void setHeadAngles(int rotation, int tilt, int nod);
 };
 
 #endif

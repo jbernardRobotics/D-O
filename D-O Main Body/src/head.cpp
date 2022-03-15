@@ -42,7 +42,7 @@ void Head::headSetup()
   neckTiltServo.attach(neckTiltPin);
 }
 
-/** setNeckRotation(float angle)
+/** setNeckRotation(int angle)
  * This sets the neck rotation angle in degrees.
  * This is the rotation of the entire head and neck assembly relative to the main body
  * 0 degrees is straight up, positive is forward and negative is backward
@@ -51,11 +51,17 @@ void Head::headSetup()
  */
 void Head::setNeckRotation(int angle)
 {
+  angle = constrainAngle(angle, 25); // Constraining the angles to the min and max
+
+  // Now we're actually setting/sending the angle
   neckRotationAngle = angle;
-  neckRotationServo.write(angle);
+  int servoAngle = map(angle, -25, 25, 0, 180);
+  neckRotationServo.write(servoAngle);
+  setNeckTilt(neckTiltAngle); // since the neck tilt angle is defined relative to the rotation bar, it needs to be updated
+  // whenever the rotation bar is moved
 }
 
-/** setNeckTilt(float angle)
+/** setNeckTilt(int angle)
  * This sets the neck tilt angle in degrees.
  * This is the tilt of the entire head and neck assembly relative to the rotation bar
  * 0 degrees is perpendicular to the rotation bar, positive is tilting the head down and negative is tilting the head up
@@ -64,13 +70,17 @@ void Head::setNeckRotation(int angle)
  */
 void Head::setNeckTilt(int angle)
 {
+  angle = constrainAngle(angle, 25); // Constraining the angles to the min and max
+
+  // Now we're actually setting/sending the angle
   neckTiltAngle = angle;
-  neckTiltServo.write(angle); // Set the servo to the angle with the microseconds value
+  int servoAngle = map(angle, -25, 25, 0, 180);
+  neckTiltServo.write(servoAngle); // Set the servo to the angle with the microseconds value
 }
 
 // HEAD COMMUNICATION---------------------------
 
-/** setHeadRotation(float angle)
+/** setHeadRotation(int angle)
  * This sets the head rotation angle in degrees.
  * This is the rotation of the entire head
  * 0 degrees is forward, positive is right and negative is left
@@ -79,20 +89,25 @@ void Head::setNeckTilt(int angle)
  */
 void Head::setHeadRotation(int angle)
 {
+  angle = constrainAngle(angle, 90); // Constraining the angles to the min and max
+
+  // Now we're actually setting/sending the angle
   headRotationAngle = angle;
   comm.sendHeadRotation(angle);
 }
 
-/** setHeadNod(float angle)
+/** setHeadNod(int angle)
  * This sets the head nod angle in degrees.
  * This is the "nodding" motion of the entire head
  * 0 degrees is level (relative to the neck base), positive is up and negative is down
  * Max angle is +/- 30 degrees
  * The angle is stored in the class variable so it can be retrieved later
- * TODO: Make the angle verification for max/min angles
  */
 void Head::setHeadNod(int angle)
 {
+  angle = constrainAngle(angle, 30); // Constraining the angles to the min and max
+
+  // Now we're actually setting/sending the angle
   headNodAngle = angle;
   comm.sendHeadNod(angle);
 }
@@ -103,10 +118,30 @@ void Head::setHeadNod(int angle)
  * 0 degrees is level (relative to the neck base), positive is leaning to the right and negative is leaning to the left
  * Max angle is +/- 30 degrees
  * The angle is stored in the class variable so it can be retrieved later
- * TODO: Make the angle verification for max/min angles
  */
 void Head::setHeadTilt(int angle)
 {
+  angle = constrainAngle(angle, 30); // Constraining the angles to the min and max
+
+  // Now we're actually setting/sending the angle
   headTiltAngle = angle;
   comm.sendHeadTilt(angle);
+}
+
+/** constrainAngle(int angle, int minMax)
+ * @param angle the angle that has to be constrained
+ * @param minMax the min/max value to constrain the angle around. It is assumed the minimum is negative maximum
+ * @return the constrained angle
+ */
+int constrainAngle(int angle, int minMax)
+{
+  if (angle > minMax)
+  {
+    angle = minMax;
+  }
+  else if (angle < (-1 * minMax))
+  {
+    angle = (-1 * minMax);
+  }
+  return angle;
 }
