@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <Servo.h>
-#include <head.h>
 #include <body.h>
 
 //*variables for the different rotations in the body for retrieval----------------------------
@@ -12,9 +11,6 @@ int driveMotorPin = 12;
 
 //*Servo object definitions----------------------------------------------------------------------
 Servo lateralWeightServo;
-
-//*Head object definition----------------------------------------------------------------------
-Head head;
 
 Body::Body(void) {}
 
