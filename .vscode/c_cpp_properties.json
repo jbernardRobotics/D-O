@@ -14,8 +14,8 @@
                 "C:/Users/jacob/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "C:/Users/jacob/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
                 "C:/Users/jacob/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
-                "${workspaceFolder}/D-O Main Body/src",
-                "${workspaceFolder}/D-O Main Body/.pio/libdeps/megaatmega2560/Servo/src"
+                "${workspaceFolder}/D-O Body/src/**",
+                "${workspaceFolder}/D-O Body/.pio/libdeps/micro/Servo/src"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,

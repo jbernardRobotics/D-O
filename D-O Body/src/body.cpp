@@ -73,7 +73,7 @@ void Body::setLateralWeightAngle(int angle)
 
 void Body::balanceAtLateralAngle(int angle)
 {
-    float angleFromIMU = 12; //TODO replace with I2C comm to IMU
+    float angleFromIMU = 12; // TODO replace with I2C comm to IMU
     float angleDiff = angle - angleFromIMU;
-    float angleOut = 
+    // float angleOut =
 }
