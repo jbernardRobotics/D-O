@@ -36,12 +36,11 @@ void Body::setNeckAngles(int rotation, int tilt)
     head.setNeckTilt(tilt);
 }
 
-/** setNeckAngles(int rotation, int tilt)
+/** setHeadAngles(int rotation, int tilt, int nod)
  * @param rotation: 0 degrees is straight up, positive is forward and negative is backward. Max angle is +/- 25 degrees
  * @param tilt: 0 degrees is perpendicular to the rotation bar, positive is tilting the head down and negative is tilting the head up. Max angle is +/- 25 degrees
  * @param nod: 0 degrees is perpendicular to the rotation bar, positive is tilting the head down and negative is tilting the head up. Max angle is +/- 25 degrees
- * This sets the neck rotation and tilt angle in degrees.
- * This is the rotation of the entire head and neck assembly relative to the main body and the tilt relative to the rotation bar
+ * This sets the head rotation, tilt, and nod angle in degrees.
  */
 void Body::setHeadAngles(int rotation, int tilt, int nod)
 {
