@@ -12,6 +12,7 @@ public:
     void setNeckAngles(int rotation, int tilt);
     void setHeadAngles(int rotation, int tilt, int nod);
     void setLateralWeightAngle(int angle);
+    void balanceAtLateralAngle(int angle);
 };
 
 #endif

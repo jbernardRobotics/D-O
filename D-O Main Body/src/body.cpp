@@ -70,3 +70,10 @@ void Body::setLateralWeightAngle(int angle)
     int servoAngle = map(angle, -25, 25, 0, 180); // TODO: make sure this map has the correct min and max vales for the servo
     lateralWeightServo.write(servoAngle);
 }
+
+void Body::balanceAtLateralAngle(int angle)
+{
+    float angleFromIMU = 12; //TODO replace with I2C comm to IMU
+    float angleDiff = angle - angleFromIMU;
+    float angleOut = 
+}
