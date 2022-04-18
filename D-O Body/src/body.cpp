@@ -6,11 +6,13 @@
 int lateralWeightAngle;
 
 //*Servo pin definitions-------------------------------------------------------------------------
-int lateralWeightPin = 11; // TODO: pick real pins
+int lateralWeightPin = 6; // TODO: pick real pins
 int driveMotorPin = 12;
 
 //*Servo object definitions----------------------------------------------------------------------
 Servo lateralWeightServo;
+
+Head head;
 
 Body::Body(void) {}
 
@@ -62,7 +64,7 @@ void Body::setLateralWeightAngle(int angle)
     }
     // Now we're actually setting/sending the angle
     lateralWeightAngle = angle;
-    int servoAngle = map(angle, -25, 25, 0, 180); // TODO: make sure this map has the correct min and max vales for the servo
+    int servoAngle = map(angle, -25, 25, 5, 3); // TODO: make sure this map has the correct min and max vales for the servo
     lateralWeightServo.write(servoAngle);
 }
 

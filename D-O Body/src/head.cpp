@@ -22,8 +22,8 @@ int headNodAngle;
 int headTiltAngle;
 
 //*Servo pin definitions-------------------------------------------------------------------------
-int neckRotationPin = 9;
-int neckTiltPin = 10;
+int neckRotationPin = 5;
+int neckTiltPin = 4;
 
 //*Servo object definitions----------------------------------------------------------------------
 Servo neckRotationServo;
@@ -35,6 +35,24 @@ Servo neckTiltServo;
 Communication comm;
 
 Head::Head(void) {}
+
+/** constrainAngle(int angle, int minMax)
+ * @param angle the angle that has to be constrained
+ * @param minMax the min/max value to constrain the angle around. It is assumed the minimum is negative maximum
+ * @return the constrained angle
+ */
+int constrainAngle(int angle, int minMax)
+{
+  if (angle > minMax)
+  {
+    angle = minMax;
+  }
+  else if (angle < (-1 * minMax))
+  {
+    angle = (-1 * minMax);
+  }
+  return angle;
+}
 
 void Head::headSetup()
 {
@@ -57,7 +75,7 @@ void Head::setNeckRotation(int angle)
   neckRotationAngle = angle;
   int servoAngle = map(angle, -25, 25, 0, 180);
   neckRotationServo.write(servoAngle);
-  setNeckTilt(neckTiltAngle); // since the neck tilt angle is defined relative to the rotation bar, it needs to be updated
+  //setNeckTilt(neckTiltAngle); // since the neck tilt angle is defined relative to the rotation bar, it needs to be updated
   // whenever the rotation bar is moved
 }
 
@@ -128,20 +146,3 @@ void Head::setHeadTilt(int angle)
   comm.sendHeadTilt(angle);
 }
 
-/** constrainAngle(int angle, int minMax)
- * @param angle the angle that has to be constrained
- * @param minMax the min/max value to constrain the angle around. It is assumed the minimum is negative maximum
- * @return the constrained angle
- */
-int constrainAngle(int angle, int minMax)
-{
-  if (angle > minMax)
-  {
-    angle = minMax;
-  }
-  else if (angle < (-1 * minMax))
-  {
-    angle = (-1 * minMax);
-  }
-  return angle;
-}
